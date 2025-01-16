@@ -19,9 +19,9 @@ router.get("/api/courses/:courseId", (req, res, next) =>
 );
 
 /**
- * Search for a course by its ID or title
+ * Search for a course by its code or title
  */
-router.get("/api/courses/search/:courseCodeOrTitle", (req, res, next) => {
+router.get("/api/searchcourses", (req, res, next) => {
   courseController.search(req, res, next)
 });
 

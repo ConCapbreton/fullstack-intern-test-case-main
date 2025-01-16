@@ -40,9 +40,18 @@ const get = async (req, res, next) => {
 const search = async (req, res, next) => {
  
   try {
-    const searchResult = await courseService.getByCodeOrTitle(req.params.courseCodeOrTitle)
+    let {courseCodeOrTitle} = req.query
+    const searchResult = await courseService.getByCodeOrTitle(courseCodeOrTitle)
+    const searchResultSubset = searchResult.map(course => {
+      return {
+        _id: course._id,
+        code: course.code,
+        title: course.title,
+        description: course.description,
 
-    res.status(200).json(searchResult);
+      }
+    })
+    res.status(200).json(searchResultSubset);
   } catch (err) {
     return next(err);
   }

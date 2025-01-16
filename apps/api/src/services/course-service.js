@@ -10,7 +10,7 @@ const getAll = () => {
 };
 
 /**
- * Retrieve a course by its ID
+ * Retrieve a course by its Code or Title
  * @param {String} courseCodeOrTitle Course Code or Title
  * @returns {Promise<Course>} Course
  */
@@ -21,8 +21,7 @@ const getByCodeOrTitle = (courseCodeOrTitle) => {
       {code: {'$regex': new RegExp(courseCodeOrTitle), '$options': "i"}},
       {title: {'$regex': new RegExp(courseCodeOrTitle), '$options': "i"}},
     ]
-  })
-    
+  })  
   return searchResult
 }
 
