@@ -15,6 +15,11 @@ const courseSchema = new Schema(
         ref: "Question",
         default: [],
     },
+    description: {
+      type: String,
+      required: true,
+      maxLength: 256,
+    },
   },
   { timestamps: true }
 );

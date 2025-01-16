@@ -21,6 +21,11 @@ const columns: ColumnsType<CourseListItem> = [
     dataIndex: 'title',
     key: 'title',
   },
+  {
+    title: 'Description',
+    dataIndex: 'description',
+    key: 'description',
+  },
 ];
 
 function transformCoursesToDatasource(courses: Course[]): CourseListItem[] {
@@ -28,6 +33,7 @@ function transformCoursesToDatasource(courses: Course[]): CourseListItem[] {
     key: course._id,
     _id: course._id,
     title: course.title,
+    description: course.description,
   }));
 }
 
