@@ -9,6 +9,7 @@ const list = async (_req, res, next) => {
     const coursesSubset = courses.map(course => {
       return {
         _id: course._id,
+        code: course.code,
         title: course.title,
         description: course.description,
 
@@ -36,9 +37,11 @@ const get = async (req, res, next) => {
 /**
  * Create a course
  */
+
 const create = async (req, res, next) => {
+  
   try {
-    const course = await courseService.create(req.body);
+    const course = await courseService.create(req.body, next);
 
     res.status(201).json(course);
   } catch (err) {

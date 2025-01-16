@@ -1,3 +1,4 @@
+const courseModel = require("../db/models/course-model");
 const CourseModel = require("../db/models/course-model");
 
 /**
@@ -31,13 +32,42 @@ const getByCode = (courseCode) => {
  * @param {Course} course Course properties
  * @returns {Promise<Course>} Created course
  */
-const create = (course) => {
+const create = async (course, next) => {
+  let newCode = await codeGenerator(next)
+
   const newCourse = new CourseModel({
-    ...course,
+    ...course, code: newCode,
   });
 
   return newCourse.save();
 };
+
+const codeGenerator = async (next) => {
+  //COULD ALSO ADD A PACKAGE TO GENERATE A CODE, FOR EXAMPLE: 
+  // npm install randomstring
+  // let provisionalCode = randomstring.generate({length: 6, charset: 'alphabetic'}).toUpperCase();
+  
+  const alphabet = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
+  let codeArray = []
+
+  for (let i = 0; i < 6; i++) {
+    codeArray.push(alphabet[Math.floor(Math.random()*26)])
+  }
+
+  let provisionalCode = codeArray.join("")
+  
+  try {
+    const course = await courseModel.findOne({ code: provisionalCode });
+    if (course) {
+      codeGenerator(next)
+    } else {
+      return provisionalCode
+    }
+  } catch (err) {
+    next(err)
+  }
+  
+}
 
 /**
  * Update a course

@@ -10,6 +10,12 @@ const courseSchema = new Schema(
       type: String,
       required: true,
     },
+    code: {
+      type: String, 
+      require: true,
+      index: true,
+      immutable: true,
+    },
     questions: {
         type: [mongoose.Schema.Types.ObjectId],
         ref: "Question",
