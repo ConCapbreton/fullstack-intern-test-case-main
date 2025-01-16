@@ -11,6 +11,23 @@ const getAll = () => {
 
 /**
  * Retrieve a course by its ID
+ * @param {String} courseCodeOrTitle Course Code or Title
+ * @returns {Promise<Course>} Course
+ */
+const getByCodeOrTitle = (courseCodeOrTitle) => {
+  
+  const searchResult = CourseModel.find({
+    $or: [
+      {code: {'$regex': new RegExp(courseCodeOrTitle), '$options': "i"}},
+      {title: {'$regex': new RegExp(courseCodeOrTitle), '$options': "i"}},
+    ]
+  })
+    
+  return searchResult
+}
+
+/**
+ * Retrieve a course by its ID
  * @param {String} courseId Course ID
  * @returns {Promise<Course>} Course
  */
@@ -43,8 +60,9 @@ const create = async (course, next) => {
 };
 
 const codeGenerator = async (next) => {
-  //COULD ALSO ADD A PACKAGE TO GENERATE A CODE, FOR EXAMPLE: 
+  // ALTERNATIVELY YOU COULD USE A PACKAGE TO GENERATE A RANDOM 6 LETTER CODE, FOR EXAMPLE: 
   // npm install randomstring
+  // const randomstring = require("randomstring");
   // let provisionalCode = randomstring.generate({length: 6, charset: 'alphabetic'}).toUpperCase();
   
   const alphabet = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
@@ -66,7 +84,6 @@ const codeGenerator = async (next) => {
   } catch (err) {
     next(err)
   }
-  
 }
 
 /**
@@ -104,4 +121,5 @@ module.exports = {
   create,
   update,
   remove,
+  getByCodeOrTitle,
 };

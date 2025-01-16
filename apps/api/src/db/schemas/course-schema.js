@@ -15,6 +15,7 @@ const courseSchema = new Schema(
       require: true,
       index: true,
       immutable: true,
+      unique: true,
     },
     questions: {
         type: [mongoose.Schema.Types.ObjectId],

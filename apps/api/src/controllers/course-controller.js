@@ -35,6 +35,20 @@ const get = async (req, res, next) => {
 };
 
 /**
+ * Search courses by title or code
+ */
+const search = async (req, res, next) => {
+ 
+  try {
+    const searchResult = await courseService.getByCodeOrTitle(req.params.courseCodeOrTitle)
+
+    res.status(200).json(searchResult);
+  } catch (err) {
+    return next(err);
+  }
+};
+
+/**
  * Create a course
  */
 
@@ -81,4 +95,5 @@ module.exports = {
   create,
   update,
   remove,
+  search,
 };
