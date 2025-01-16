@@ -6,7 +6,15 @@ const courseService = require("../services/course-service");
 const list = async (_req, res, next) => {
   try {
     const courses = await courseService.getAll();
-    res.status(200).json(courses);
+    const coursesSubset = courses.map(course => {
+      return {
+        _id: course._id,
+        title: course.title,
+        description: course.description,
+
+      }
+    })
+    res.status(200).json(coursesSubset);
   } catch (err) {
     return next(err);
   }

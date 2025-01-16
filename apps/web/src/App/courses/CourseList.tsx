@@ -29,12 +29,14 @@ const columns: ColumnsType<CourseListItem> = [
 ];
 
 function transformCoursesToDatasource(courses: Course[]): CourseListItem[] {
+  console.log(courses)
   return courses.map(course => ({
     key: course._id,
     _id: course._id,
     title: course.title,
     description: course.description,
   }));
+  
 }
 
 export const CourseList = () => {
