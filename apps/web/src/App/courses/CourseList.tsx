@@ -9,7 +9,7 @@ import { Course } from "../../models/course.model";
 import { DataType } from "../../models/data-type.model";
 import * as S from './CourseList.styles'
 
-type CourseListItem = DataType<Pick<Course, '_id'>>
+type CourseListItem = DataType<Pick<Course, 'code'>>
 
 const columns: ColumnsType<CourseListItem> = [
   {
@@ -58,7 +58,7 @@ export const CourseList = () => {
   }, [courses]);
 
   function handleCourseClick(course: CourseListItem) {
-    navigate(`./${course._id}`);
+    navigate(`./${course.code}`);
   }
 
   async function handleSearchChange(event: any) {
