@@ -17,16 +17,12 @@ const courseSchema = new Schema(
       immutable: true,
       unique: true,
     },
-    questions: {
-        type: [mongoose.Schema.Types.ObjectId],
-        ref: "Question",
-        default: [],
-    },
     description: {
       type: String,
       required: true,
       maxLength: 256,
     },
+    questions: [questionSchema],
   },
   { timestamps: true }
 );
