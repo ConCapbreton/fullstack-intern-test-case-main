@@ -12,9 +12,9 @@ router.get("/api/courses", (req, res, next) =>
 );
 
 /**
- * Get a specific course by its ID
+ * Get a specific course by its Code
  */
-router.get("/api/courses/:courseId", (req, res, next) =>
+router.get("/api/courses/:courseCode", (req, res, next) =>
   courseController.get(req, res, next)
 );
 

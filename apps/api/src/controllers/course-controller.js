@@ -12,7 +12,6 @@ const list = async (_req, res, next) => {
         code: course.code,
         title: course.title,
         description: course.description,
-
       }
     })
     res.status(200).json(coursesSubset);
@@ -26,7 +25,7 @@ const list = async (_req, res, next) => {
  */
 const get = async (req, res, next) => {
   try {
-    const course = await courseService.getById(req.params.courseId);
+    const course = await courseService.getByCode(req.params.courseCode);
 
     res.status(200).json(course);
   } catch (err) {
