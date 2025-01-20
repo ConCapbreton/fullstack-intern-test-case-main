@@ -37,13 +37,13 @@ function transformCoursesToDatasource(courses: Course[]): CourseListItem[] {
     title: course.title,
     description: course.description,
   }));
-  
 }
 
 export const CourseList = () => {
   const navigate = useNavigate();
   const [courses, setCourses] = useState<Course[]>([]);
   const [coursesDataSource, setCoursesDataSource] = useState<CourseListItem[]>([]);
+
 
   useEffect(() => {
     async function getCourses() {
