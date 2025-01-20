@@ -22,7 +22,11 @@ const courseSchema = new Schema(
       required: true,
       maxLength: 256,
     },
-    questions: [questionSchema],
+    questions: {
+      type: [mongoose.Schema.Types.ObjectId],
+      ref: "Question",
+      default: [],
+    },
   },
   { timestamps: true }
 );
