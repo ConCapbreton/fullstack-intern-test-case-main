@@ -26,5 +26,13 @@ export async function updateQuestion(questionId: String, newQuestionValue: Strin
   return res.json() as Promise<Question[]>;
 }
 
+export async function duplicateQuestion(courseId: String, questionId: String) {
+  const res = await fetch(`http://localhost:3000/api/courses/${courseId}/questions/${questionId}/duplicate`, {
+    method: 'PUT',
+  })
+  return res.json() as Promise<Question>;
+}
+
+
 
 

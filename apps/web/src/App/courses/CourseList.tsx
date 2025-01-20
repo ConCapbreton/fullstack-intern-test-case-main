@@ -44,7 +44,6 @@ export const CourseList = () => {
   const [courses, setCourses] = useState<Course[]>([]);
   const [coursesDataSource, setCoursesDataSource] = useState<CourseListItem[]>([]);
 
-
   useEffect(() => {
     async function getCourses() {
       const coursesPayload = await fetchCourses();
