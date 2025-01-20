@@ -1,5 +1,6 @@
 const QuestionModel = require("../db/models/question-model");
 const CourseModel = require("../db/models/course-model");
+const mongoose = require("mongoose");
 
 /**
  * Retrieve the list of all questions from a course
@@ -70,10 +71,30 @@ const remove = async (courseId, questionId) => {
   await QuestionModel.deleteOne({ _id: questionId });
 };
 
+/**
+ * Duplicate a question in a specific course
+ * @param {String} questionId Question ID
+ * @returns {Promise<Question>} Created question
+ */
+const duplicateById = async (courseId, questionId) => {
+  const questionToCopy = await QuestionModel.findById(questionId)
+  const questionDuplicate = new QuestionModel(questionToCopy.toObject())
+  questionDuplicate._id = new mongoose.Types.ObjectId();
+  questionDuplicate.title = `Duplicate: ${questionDuplicate.title}`
+  
+  await CourseModel.updateOne(
+    { _id: courseId },
+    { $addToSet: { questions: questionDuplicate._id } }
+  );
+
+  return await questionDuplicate.save()
+};
+
 module.exports = {
   getAllByCourse,
   getById,
   create,
   update,
   remove,
+  duplicateById,
 };

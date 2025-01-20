@@ -28,6 +28,21 @@ const get = async (req, res, next) => {
 };
 
 /**
+ * Duplicate a specific question
+ */
+const duplicate = async (req, res, next) => {
+  try {
+    const question = await questionService.duplicateById(req.params.courseId, req.params.questionId);
+
+    res.status(200).json(question);
+  } catch (err) {
+    return next(err);
+  }
+};
+
+
+
+/**
  * Create a question
  */
 const create = async (req, res, next) => {
@@ -76,4 +91,5 @@ module.exports = {
   create,
   update,
   remove,
+  duplicate,
 };

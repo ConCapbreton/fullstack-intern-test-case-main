@@ -26,6 +26,16 @@ router.post("/api/courses/:courseId/questions", (req, res, next) => {
 });
 
 /**
+ * Duplicate a question by its ID
+ */
+router.put(
+  "/api/courses/:courseId/questions/:questionId/duplicate",
+  (req, res, next) => {
+    questionController.duplicate(req, res, next);
+  }
+);
+
+/**
  * Update a question by its ID
  */
 router.patch(
