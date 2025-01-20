@@ -23,6 +23,20 @@ app.use((req, res, next) => {
   next();
 });
 
+app.use((req, res, next) => {
+  let dateTime = new Date()
+  let body = JSON.stringify(req.body)
+  console.log(`
+    \n================================================================================
+    \nRequest ID: ${dateTime} 
+    \nHTTP Method: ${req.method} 
+    \nFull URL (including query parameters): http://localhost:3000${req.originalUrl} 
+    \nRequest Body: ${body}
+    \n================================================================================
+  `)
+  next()
+})
+
 app.use(courseRouter);
 app.use(questionRouter);
 app.use(defaultRouter);
