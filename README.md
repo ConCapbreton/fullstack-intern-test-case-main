@@ -14,7 +14,13 @@ MARTIN CONNOR SEXTON
 - You can see the code that was updated for each step at this link: https://github.com/ConCapbreton/fullstack-intern-test-case-main/commits/main/
 
 ### Install and Run the Project
-The installation of the project remains unchanged from the original instruction: 
+-The installation of the project remains unchanged from the original instruction: 
+
+- Ensure Docker Desktop is open.
+
+- Open the terminal and ensure that you are in the parent folder of the project where the highest level package.json and the docker-compose files are located.
+
+- In the terminal send the following commands:
 
 - Launch the Docker container from the project
   ```bash
